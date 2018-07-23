@@ -127,7 +127,10 @@ return [
                 'stokDetail'=>App\GraphQL\Query\stokDetailQuery::class,
                 'stokHeader'=>App\GraphQL\Query\stokHeaderQuery::class,
                 'gudang'=>App\GraphQL\Query\gudangQuery::class,
-                'barang'=>App\GraphQL\Query\barangQuery::class
+                'barang'=>App\GraphQL\Query\barangQuery::class,
+                'wallet'=>App\GraphQL\Query\walletQuery::class,
+                'saldo'=>App\GraphQL\Query\saldoQuery::class,
+
             ],
             'mutation' => [
                 //gudang
@@ -146,8 +149,17 @@ return [
                 'newStokDetail'=>App\GraphQL\Mutation\createStokDetail::class,
                 'delStokDetail'=>App\GraphQL\Mutation\deleteStokDetail::class,
                 'updateStokDetail'=>App\GraphQL\Mutation\updateStokDetail::class,
+               //wallet
+               'newWallet'=>App\GraphQL\Mutation\createWallet::class,
+                'delWallet'=>App\GraphQL\Mutation\deleteWallet::class,
+                'updateWallet'=>App\GraphQL\Mutation\updateWallet::class,
+                //saldo
+               'newSaldo'=>App\GraphQL\Mutation\createSaldo::class,
+               'delSaldo'=>App\GraphQL\Mutation\deleteSaldo::class,
+               'updateSaldo'=>App\GraphQL\Mutation\updateSaldo::class,
                
-                ]
+                
+               ]
         ]
     ],
 
@@ -204,6 +216,10 @@ return [
         'App\GraphQL\Type\barangType',
         'App\GraphQL\Type\stokHeaderType',
         'App\GraphQL\Type\stokDetailType',
+        'App\GraphQL\Type\saldoType',
+        'App\GraphQL\Type\walletType',
+    
+    
     ],
 
     /*
