@@ -11,7 +11,7 @@ class StokHeader extends Model
   use SoftDeletes;
 protected $dates = ['deleted_at'];
     protected $fillable = [
-      
+      'nomor','jenis','tanggal','id_gudang'
           ];
    
     public function stokDetail()

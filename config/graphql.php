@@ -130,7 +130,9 @@ return [
                 'barang'=>App\GraphQL\Query\barangQuery::class,
                 'wallet'=>App\GraphQL\Query\walletQuery::class,
                 'saldo'=>App\GraphQL\Query\saldoQuery::class,
-
+                'pricing'=>App\GraphQL\Query\pricingQuery::class,
+                'sellingList'=>App\GraphQL\Query\sellingListQuery::class,
+                'exportRequest'=>App\GraphQL\Query\exportRequestQuery::class,
             ],
             'mutation' => [
                 //gudang
@@ -157,7 +159,20 @@ return [
                'newSaldo'=>App\GraphQL\Mutation\createSaldo::class,
                'delSaldo'=>App\GraphQL\Mutation\deleteSaldo::class,
                'updateSaldo'=>App\GraphQL\Mutation\updateSaldo::class,
-               
+               //pricing
+               'newPricing'=>App\GraphQL\Mutation\createPricing::class,
+               'delPricing'=>App\GraphQL\Mutation\deletePricing::class,
+               'updatePricing'=>App\GraphQL\Mutation\updatePricing::class,
+               //selling list
+               'newSellingList'=>App\GraphQL\Mutation\createSellingList::class,
+               'delSellingList'=>App\GraphQL\Mutation\deleteSellingList::class,
+               'updateSellingList'=>App\GraphQL\Mutation\updateSellingList::class,
+               //export request
+               'newExportRequest'=>App\GraphQL\Mutation\createExportRequest::class,
+               'delExportRequest'=>App\GraphQL\Mutation\deleteExportRequest::class,
+               'updateExportRequest'=>App\GraphQL\Mutation\updateExportRequest::class,
+              
+                
                 
                ]
         ]
@@ -218,6 +233,10 @@ return [
         'App\GraphQL\Type\stokDetailType',
         'App\GraphQL\Type\saldoType',
         'App\GraphQL\Type\walletType',
+        'App\GraphQL\Type\pricingType',
+        'App\GraphQL\Type\sellingListType',
+        'App\GraphQL\Type\exportRequestType',
+       
     
     
     ],
