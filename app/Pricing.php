@@ -14,5 +14,5 @@ protected $dates = ['deleted_at'];
         'sku_barang','tanggal','harga','harga_promo'
            ];
     
-
+          
 }
