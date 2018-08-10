@@ -4,15 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class ExportRequest extends Model
+class Image extends Model
 {
-  public $table="exportRequest";
+  public $table="image";
   
   use SoftDeletes;
 protected $dates = ['deleted_at'];
     protected $fillable = [
-    'id_user','target'  
-    ];
+           ];
     
-
+           public function barang()
+    {
+        return $this->belongsTo('App\Barang', 'id_barang');
+    }
 }

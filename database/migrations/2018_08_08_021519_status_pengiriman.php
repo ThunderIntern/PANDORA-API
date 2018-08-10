@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Barang extends Migration
+class StatusPengiriman extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class Barang extends Migration
      */
     public function up()
     {
-        Schema::create('barang', function (Blueprint $table) {
+        Schema::create('status_pengiriman', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama');
-            $table->string('sku');
-            $table->text('deskripsi');
-            $table->string('dimensi');
-            $table->double('berat');
+            $table->string('status');
+            $table->dateTime('tanggal');
+            $table->text('lokasi');
+            $table->unsignedInteger('id_pengiriman');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('id_pengiriman')->references('id')->on('pengiriman')->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ class Barang extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang');
+        Schema::dropIfExists('status_pengiriman');
     }
 }

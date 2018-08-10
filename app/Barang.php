@@ -22,5 +22,9 @@ protected $dates = ['deleted_at'];
     {
         return $this->hasMany('App\StokDetail', 'id_barang');
     }
+    public function image()
+    {
+        return $this->hasMany('App\Image', 'id_barang');
+    }
    
 }

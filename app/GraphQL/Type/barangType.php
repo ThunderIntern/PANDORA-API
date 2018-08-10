@@ -79,7 +79,24 @@ class barangType extends BaseType
 
                     return $root->stokDetail;
                 }
-            ]
+            ],
+            'image' => [
+                'args' => [
+                    'id' => [
+                        'type'        => Type::Int(),
+                        'description' => 'id pesanan',
+                    ],
+                ],
+                'type' => Type::listOf(GraphQL::type('imageType')),
+                
+                'resolve' => function ($root, $args) {
+                    if (isset($args['id'])) {
+                        return  $root->image->where('id_barang', $args['id']);
+                    }
+
+                    return $root->image;
+                }
+            ],
         ];
     }
 }

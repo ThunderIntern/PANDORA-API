@@ -15,7 +15,7 @@ class SellingList extends Migration
     {
         Schema::create('sellingList', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
+            $table->string('id_user');
             $table->string('sku_barang');
             $table->double('harga');
             $table->timeStamps();

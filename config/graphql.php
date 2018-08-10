@@ -133,6 +133,13 @@ return [
                 'pricing'=>App\GraphQL\Query\pricingQuery::class,
                 'sellingList'=>App\GraphQL\Query\sellingListQuery::class,
                 'exportRequest'=>App\GraphQL\Query\exportRequestQuery::class,
+                'image'=>App\GraphQL\Query\imageQuery::class,
+                'pesananHeader'=>App\GraphQL\Query\pesananHeaderQuery::class,
+                'status'=>App\GraphQL\Query\statusQuery::class,
+                'statusPengiriman'=>App\GraphQL\Query\statusPengirimanQuery::class,
+                'pesananDetail'=>App\GraphQL\Query\pesananDetailQuery::class,
+                'pengiriman'=>App\GraphQL\Query\pengirimanQuery::class,
+
             ],
             'mutation' => [
                 //gudang
@@ -171,7 +178,31 @@ return [
                'newExportRequest'=>App\GraphQL\Mutation\createExportRequest::class,
                'delExportRequest'=>App\GraphQL\Mutation\deleteExportRequest::class,
                'updateExportRequest'=>App\GraphQL\Mutation\updateExportRequest::class,
-              
+               //image
+               'newImage'=>App\GraphQL\Mutation\createImage::class,
+               'delImage'=>App\GraphQL\Mutation\deleteImage::class,
+               'updateImage'=>App\GraphQL\Mutation\updateImage::class,
+                //pesanan header
+                'newPesananHeader'=>App\GraphQL\Mutation\createPesananHeader::class,
+                'delPesananHeader'=>App\GraphQL\Mutation\deletePesananHeader::class,
+                'updatePesananHeader'=>App\GraphQL\Mutation\updatePesananHeader::class,
+               //pesanan detail
+               'newPesananDetail'=>App\GraphQL\Mutation\createPesananDetail::class,
+               'delPesananDetail'=>App\GraphQL\Mutation\deletePesananDetail::class,
+               'updatePesananDetail'=>App\GraphQL\Mutation\updatePesananDetail::class,
+              //status
+              'newStatus'=>App\GraphQL\Mutation\createStatus::class,
+              'delStatus'=>App\GraphQL\Mutation\deleteStatus::class,
+              'updateStatus'=>App\GraphQL\Mutation\updateStatus::class,
+             //pengiriman
+             'newPengiriman'=>App\GraphQL\Mutation\createPengiriman::class,
+             'delPesananHeader'=>App\GraphQL\Mutation\deletePengiriman::class,
+             'updatePengiriman'=>App\GraphQL\Mutation\updatePengiriman::class,
+            //status pengiriman
+            'newStatusPengiriman'=>App\GraphQL\Mutation\createStatusPengiriman::class,
+            'delStatusPengiriman'=>App\GraphQL\Mutation\deleteStatusPengiriman::class,
+            'updateStatusPengiriman'=>App\GraphQL\Mutation\updateStatusPengiriman::class,
+           
                 
                 
                ]
@@ -236,8 +267,13 @@ return [
         'App\GraphQL\Type\pricingType',
         'App\GraphQL\Type\sellingListType',
         'App\GraphQL\Type\exportRequestType',
-       
-    
+        'App\GraphQL\Type\imageType',
+        'App\GraphQL\Type\pesananHeaderType',
+        'App\GraphQL\Type\pengirimanType',
+        'App\GraphQL\Type\pesananDetailType',
+        'App\GraphQL\Type\statusPengirimanType',
+        'App\GraphQL\Type\statusType',
+
     
     ],
 

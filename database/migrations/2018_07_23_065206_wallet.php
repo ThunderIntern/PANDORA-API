@@ -15,7 +15,7 @@ class Wallet extends Migration
     {
         Schema::create('wallet', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
+            $table->string('id_user');
             $table->string('nomer_rekening');
             $table->timeStamps();
             $table->softDeletes();

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Barang extends Migration
+class PesananDetail extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class Barang extends Migration
      */
     public function up()
     {
-        Schema::create('barang', function (Blueprint $table) {
+        Schema::create('pesanan_detail', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama');
             $table->string('sku');
-            $table->text('deskripsi');
-            $table->string('dimensi');
-            $table->double('berat');
+            $table->integer('jumlah_barang');
+            $table->double('harga');
+            $table->double('harga_promo');
+            $table->unsignedInteger('id_pesanan_header');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('id_pesanan_header')->references('id')->on('pesanan_header')->onDelete('cascade');
+
         });
     }
 
@@ -32,6 +34,6 @@ class Barang extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang');
+        Schema::dropIfExists('pesanan_detail');
     }
 }

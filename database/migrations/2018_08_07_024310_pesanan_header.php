@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Barang extends Migration
+class PesananHeader extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class Barang extends Migration
      */
     public function up()
     {
-        Schema::create('barang', function (Blueprint $table) {
+        Schema::create('pesanan_header', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama');
-            $table->string('sku');
-            $table->text('deskripsi');
-            $table->string('dimensi');
-            $table->double('berat');
+            $table->string('nomor')->unique();
+            $table->dateTime('tanggal');
+            $table->double('total');
+            $table->double('ongkos_kirim');
             $table->timestamps();
             $table->softDeletes();
-        });
+            });
     }
 
     /**
@@ -32,6 +31,6 @@ class Barang extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang');
+        Schema::dropIfExists('pesanan_header');
     }
 }

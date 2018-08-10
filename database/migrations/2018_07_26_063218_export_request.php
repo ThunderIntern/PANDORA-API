@@ -15,7 +15,7 @@ class ExportRequest extends Migration
     {
         Schema::create('exportRequest', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
+            $table->string('id_user');
             $table->string('target');
             $table->timeStamps();
             $table->softDeletes();
