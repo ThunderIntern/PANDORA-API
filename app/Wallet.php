@@ -19,4 +19,7 @@ protected $dates = ['deleted_at'];
     {
         return $this->hasMany('App\Saldo', 'id_wallet');
     }
+    public function pesananHeader(){
+        return $this->hasOne('App\PesananHeader','id_user','id_user');
+    }
 }

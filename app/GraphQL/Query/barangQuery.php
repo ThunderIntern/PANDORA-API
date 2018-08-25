@@ -7,7 +7,6 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
 use App\Barang;
-use App\Events\HargaEvent;
 class barangQuery extends Query
 {
     protected $attributes = [
@@ -27,31 +26,27 @@ class barangQuery extends Query
             'id' => ['name' => 'id', 'type' => Type::Int()],
             'sku' => ['name' => 'sku', 'type' => Type::string()],
             'nama' => ['name' => 'nama', 'type' => Type::string()],
-            
-            'deskripsi' => ['name' => 'deskripsi', 'type' => Type::string()],
            
+            'deskripsi' => ['name' => 'deskripsi', 'type' => Type::string()],
+            'berat' => ['name' => 'berat', 'type' => Type::Int()],
+            'dimensi' => ['name' => 'dimensi', 'type' => Type::string()],
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
-        // $check = new Barang($args);
-        // $event = event(new HargaEvent($check));
-        // if($event){
-       
+     
          if(isset($args['sku'])) {
-            return Barang::where('sku', $args['sku'])->get() ;
+            return Barang::where('sku', $args['sku'])->first() ;
         }else if (isset($args['id'])) {
-            return Barang::where('id' , $args['id'])->get();
+            return Barang::where('id' , $args['id'])->first();
         } else if(isset($args['nama'])) {
-            return Barang::where('nama', $args['nama'])->get();
+            return Barang::where('nama', $args['nama'])->first();
         
           }  else {
                 return Barang::all();
             }
-        // }else {
-        //         return Barang::all();
-        //     }
+      
         
        
     }

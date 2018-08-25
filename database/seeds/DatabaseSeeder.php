@@ -12,10 +12,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call('UsersTableSeeder');
-        $this->call('pesanan');
-        $this->call('pricing');
-        $this->call('sellingList');
-        $this->call('wallet');
+        // $this->call('pesanan');
+        // $this->call('pricing');
+        // $this->call('sellingList');
+        // $this->call('wallet');
         $this->call('Warehouse');
+        // $this->call('barang');
+        // factory(App\Barang::class, 50)->create()->make();
+        // $this->call('barang',50);
     }
 }

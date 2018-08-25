@@ -12,8 +12,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\HargaEvent' => [
-            'App\Listeners\HargaListener',
+        'App\Events\onHoldEvent' => [
+            'App\Listeners\onHoldListener',
         ],
     ];
 }

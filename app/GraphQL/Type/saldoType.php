@@ -28,7 +28,9 @@ class saldoType extends BaseType
             'jumlah' => [
                 'type' => Type::Int()
             ],
-            
+            'onHold' => [
+                'type' => Type::Int()
+            ],
             'keterangan'=>[
                 'type'=> Type::string()
             ],

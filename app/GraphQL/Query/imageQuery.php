@@ -36,7 +36,7 @@ class imageQuery extends Query
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
         if (isset($args['id'])) {
-            return Image::where('id' , $args['id'])->get();
+            return Image::where('id' , $args['id'])->first();
         /* } else if(isset($args['email'])) {
             return User::where('email', $args['email'])->get();
         }else if(isset($args['username'])) {

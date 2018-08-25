@@ -15,7 +15,7 @@ class StokHeader extends Migration
     {
         Schema::create('stok_header', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nomor');
+            $table->string('nomor')->unique();
             $table->string('jenis');
             $table->dateTime('tanggal');
             $table->unsignedInteger('id_gudang');

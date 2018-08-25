@@ -11,6 +11,7 @@ class Image extends Model
   use SoftDeletes;
 protected $dates = ['deleted_at'];
     protected $fillable = [
+        'id_barang','image_ori','thumbnail'
            ];
     
            public function barang()

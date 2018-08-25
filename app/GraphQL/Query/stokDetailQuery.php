@@ -36,15 +36,16 @@ class stokDetailQuery extends Query
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
-        if (isset($args['id'])) {
-            return StokDetail::where('id' , $args['id'])->get();
-        /* } else if(isset($args['email'])) {
-            return User::where('email', $args['email'])->get();
-        }else if(isset($args['username'])) {
-            return User::where('username', $args['username'])->get(); 
-        }else if(isset($args['password'])) {
-            return User::where('password', $args['password'])->get(); 
-           */
+        if (isset($args['id_stok_header'])) {
+            return StokDetail::where('id_stok_header' , $args['id_stok_header'])->get();
+         } else if(isset($args['id'])) {
+            return StokDetail::where('id', $args['id'])->get();
+        // }
+        // else if(isset($args['username'])) {
+        //     return User::where('username', $args['username'])->get(); 
+        // }else if(isset($args['password'])) {
+        //     return User::where('password', $args['password'])->get(); 
+           
         }else {
             return StokDetail::all();
         }

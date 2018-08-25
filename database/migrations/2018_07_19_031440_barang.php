@@ -16,7 +16,7 @@ class Barang extends Migration
         Schema::create('barang', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
-            $table->string('sku');
+            $table->string('sku')->unique();
             $table->text('deskripsi');
             $table->string('dimensi');
             $table->double('berat');

@@ -23,6 +23,9 @@ protected $dates = ['deleted_at'];
            }
            public function pesananDetail()
            {
-               return $this->hasMany('App\PesananDetail', 'id_pesanan_header');
+               return $this->hasOne('App\PesananDetail', 'id_pesanan_header');
            }
+           public function wallet(){
+            return $this->hasOne('App\Wallet','id_user','id_user');
+        }
 }

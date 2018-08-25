@@ -20,7 +20,7 @@ class walletType extends BaseType
                 'type' => Type::nonNull(Type::Int())
             ],
                
-            'user_id' => [
+            'id_user' => [
                 'type' => Type::string()
             ],
             'nomer_rekening'=>[
@@ -42,6 +42,23 @@ class walletType extends BaseType
                     }
 
                     return $root->saldo;
+                }
+            ],
+            'pesananHeader' => [
+                'args' => [
+                    'id_user' => [
+                        'type'        => Type::string(),
+                        'description' => 'id pesanan',
+                    ],
+                ],
+                'type' =>    (GraphQL::type('pesananHeaderType')),
+                
+                'resolve' => function ($root, $args) {
+                    if (isset($args['id_user'])) {
+                        return  $root->pesananHeader->where('id_user', $args['id_user']);
+                    }
+
+                    return $root->pesananeHeader;
                 }
             ]
         ];

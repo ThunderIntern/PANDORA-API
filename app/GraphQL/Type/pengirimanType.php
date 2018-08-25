@@ -25,42 +25,30 @@ class pengirimanType extends BaseType
             'tanggal_pengiriman' => [
                 'type' => Type::string()
             ],
-            'alamat_pengirim' => [
-                'type' => Type::string()
+            'biodata_pengirim' => [
+                'type' =>  GraphQL::type('Alamat')
             ],
             'nama_pengirim' => [
                 'type' => Type::string()
             ],
-            'no_telp_pengirim' => [
-                'type' => Type::string()
-            ],
-            'kodepos_pengirim' => [
-                'type' => Type::string()
-            ],
-            'alamat_penerima' => [
-                'type' => Type::string()
+           
+            'biodata_penerima' => [
+                'type' =>  GraphQL::type('Alamat')
             ],
             'nama_penerima' => [
                 'type' => Type::string()
             ],
-            'no_telp_penerima' => [
-                'type' => Type::string()
-            ],
-            'kodepos_penerima' => [
-                'type' => Type::string()
-            ],
+           
             'jasa_ekspedisi' => [
                 'type' => Type::string()
             ],
             'tipe_paket' => [
                 'type' => Type::string()
             ],
-            'longitude' => [
-                'type' => Type::string()
+            'geolocation' => [
+                'type' =>  GraphQL::type('Geolocation')
             ],
-            'latitude' => [
-                'type' => Type::string()
-            ],
+            
             'id_pesanan_header' => [
                 'type' => Type::Int()
             ],

@@ -20,6 +20,10 @@ class pesananHeaderType extends BaseType
                 'type'=> Type::string()
                 
             ],
+            'id_user'=>[
+                'type'=> Type::string()
+                
+            ],
             'id' => [
                 'type' => Type::nonNull(Type::Int())
             ],
@@ -58,7 +62,7 @@ class pesananHeaderType extends BaseType
                         'description' => 'id pesanan',
                     ],
                 ],
-                'type' => Type::listOf(GraphQL::type('pesananDetailType')),
+                'type' => (GraphQL::type('pesananDetailType')),
                 
                 'resolve' => function ($root, $args) {
                     if (isset($args['id'])) {
@@ -83,6 +87,23 @@ class pesananHeaderType extends BaseType
                     }
 
                     return $root->pengiriman;
+                }
+            ],
+            'wallet' => [
+                'args' => [
+                    'id_user' => [
+                        'type'        => Type::string(),
+                        'description' => 'id pesanan',
+                    ],
+                ],
+                'type' =>(GraphQL::type('walletType')),
+                
+                'resolve' => function ($root, $args) {
+                    if (isset($args['id_user'])) {
+                        return  $root->wallet->where('id_user', $args['id_user']);
+                    }
+
+                    return $root->wallet;
                 }
             ],
         ];

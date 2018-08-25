@@ -84,6 +84,9 @@ $app->register(App\Providers\EventServiceProvider::class);
 // graph ql
 $app->configure('graphql');
 $app->register(Folklore\GraphQL\LumenServiceProvider::class);
+// otorisasi
+$app->register(App\Providers\OtorisasiServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

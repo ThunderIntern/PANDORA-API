@@ -17,8 +17,8 @@ class pricing extends Seeder
             
             'sku_barang' => 'qwe1',
             'tanggal' => '2018-07-18 13:44:27',
-            'harga' => 900000,
-            'harga_promo' => 800000,
+            'harga' => 10000,
+            'harga_promo' => 5000,
             ]);
 
             $er = er::create([

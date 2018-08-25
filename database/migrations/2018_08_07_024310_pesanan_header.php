@@ -19,6 +19,7 @@ class PesananHeader extends Migration
             $table->dateTime('tanggal');
             $table->double('total');
             $table->double('ongkos_kirim');
+            $table->string('id_user');
             $table->timestamps();
             $table->softDeletes();
             });

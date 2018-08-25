@@ -31,8 +31,9 @@ class pricingType extends BaseType
             ],
             'harga_promo' => [
                 'type' => Type::Int()
-            ]
-        ] ;          
+            ],
+           
+        ];          
           
     }}
 

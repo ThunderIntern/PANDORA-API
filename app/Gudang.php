@@ -19,4 +19,14 @@ protected $dates = ['deleted_at'];
     {
         return $this->hasMany('App\StokHeader', 'id_gudang');
     }
+    //mutator
+    public function setAlamatAttribute($alamat)
+    {
+        $this->attributes['alamat'] =json_encode($alamat);
+    }
+    //accessor
+    public function getAlamatAttribute($alamat)
+    {
+        return json_decode($this->attributes['alamat'],true);
+    }
 }

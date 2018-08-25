@@ -24,7 +24,7 @@ class gudangType extends BaseType
                 'type' => Type::string()
             ],
             'alamat'=>[
-                'type'=> Type::string()
+                'type'=> GraphQL::type('Alamat')
             ],
                          
             'stokHeader' => [

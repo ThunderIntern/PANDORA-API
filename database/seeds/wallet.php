@@ -20,7 +20,8 @@ class wallet extends Seeder
         $s = s::create([
             'id_wallet' => $w->id,
             'tanggal' => '2018-07-18 13:44:27',
-            'jumlah' => 500000,
+            'jumlah' => 5000000,
+            'onHold'=>false,
             'keterangan' => 'tambah saldo'
         ]);
         

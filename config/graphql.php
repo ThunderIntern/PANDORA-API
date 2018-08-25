@@ -124,6 +124,8 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
+                'users'=> App\GraphQL\Query\User\UsersQuery::class,
+                
                 'stokDetail'=>App\GraphQL\Query\stokDetailQuery::class,
                 'stokHeader'=>App\GraphQL\Query\stokHeaderQuery::class,
                 'gudang'=>App\GraphQL\Query\gudangQuery::class,
@@ -139,72 +141,104 @@ return [
                 'statusPengiriman'=>App\GraphQL\Query\statusPengirimanQuery::class,
                 'pesananDetail'=>App\GraphQL\Query\pesananDetailQuery::class,
                 'pengiriman'=>App\GraphQL\Query\pengirimanQuery::class,
+                'kategori'=>App\GraphQL\Query\kategoriQuery::class,
+                'kategoribarang'=>App\GraphQL\Query\kategoribarangQuery::class,
 
             ],
             'mutation' => [
+                //user
+                'Authenticate'		=> App\GraphQL\Mutation\User\Authenticate::class,
+				'StoreUser'			=> App\GraphQL\Mutation\User\StoreUser::class,
+				'AddUser'			=> App\GraphQL\Mutation\User\AddUser::class,
+				'AddOrganization'	=> App\GraphQL\Mutation\User\AddOrganization::class,
+				'RemoveOrganization'=> App\GraphQL\Mutation\User\RemoveOrganization::class,
+				'AddScope'			=> App\GraphQL\Mutation\User\AddScope::class,
+				'RemoveScope'		=> App\GraphQL\Mutation\User\RemoveScope::class,
+				'Deactivate'		=> App\GraphQL\Mutation\User\Deactivate::class,
+				'resetPassword'		=> App\GraphQL\mutation\User\ResetPassword::class,
+				'changeProfile'		=> App\GraphQL\mutation\User\ChangeProfile::class,
+				'forgetPassword'	=> App\GraphQL\mutation\User\ForgetPassword::class,
                 //gudang
-                'newGudang'=>App\GraphQL\Mutation\createGudang::class,
-                'delGudang'=>App\GraphQL\Mutation\deleteGudang::class,
-                'updateGudang'=>App\GraphQL\Mutation\updateGudang::class,
+                'newGudang'=>App\GraphQL\Mutation\warehouse\gudang\createGudang::class,
+                'delGudang'=>App\GraphQL\Mutation\warehouse\gudang\deleteGudang::class,
+                'updateGudang'=>App\GraphQL\Mutation\warehouse\gudang\updateGudang::class,
                 //barang
-                'newBarang'=>App\GraphQL\Mutation\createBarang::class,
-                'delBarang'=>App\GraphQL\Mutation\deleteBarang::class,
-                'updateBarang'=>App\GraphQL\Mutation\updateBarang::class,
+                'newBarang'=>App\GraphQL\Mutation\warehouse\barang\createBarang::class,
+                'delBarang'=>App\GraphQL\Mutation\warehouse\barang\deleteBarang::class,
+                'updateBarang'=>App\GraphQL\Mutation\warehouse\barang\updateBarang::class,
                 //stok header
-                'newStokHeader'=>App\GraphQL\Mutation\createStokHeader::class,
-                'delStokHeader'=>App\GraphQL\Mutation\deleteStokHeader::class,
-                'updateStokHeader'=>App\GraphQL\Mutation\updateStokHeader::class,
+                'newStokHeader'=>App\GraphQL\Mutation\warehouse\stokHeader\createStokHeader::class,
+                'delStokHeader'=>App\GraphQL\Mutation\warehouse\stokHeader\deleteStokHeader::class,
+                'updateStokHeader'=>App\GraphQL\Mutation\warehouse\stokHeader\updateStokHeader::class,
                 //stok detail
-                'newStokDetail'=>App\GraphQL\Mutation\createStokDetail::class,
-                'delStokDetail'=>App\GraphQL\Mutation\deleteStokDetail::class,
-                'updateStokDetail'=>App\GraphQL\Mutation\updateStokDetail::class,
+                'newStokDetail'=>App\GraphQL\Mutation\warehouse\stokDetail\createStokDetail::class,
+                'delStokDetail'=>App\GraphQL\Mutation\warehouse\stokDetail\deleteStokDetail::class,
+                'updateStokDetail'=>App\GraphQL\Mutation\warehouse\stokDetail\updateStokDetail::class,
                //wallet
-               'newWallet'=>App\GraphQL\Mutation\createWallet::class,
-                'delWallet'=>App\GraphQL\Mutation\deleteWallet::class,
-                'updateWallet'=>App\GraphQL\Mutation\updateWallet::class,
+               'newWallet'=>App\GraphQL\Mutation\walet\wallet\createWallet::class,
+                'delWallet'=>App\GraphQL\Mutation\walet\wallet\deleteWallet::class,
+                'updateWallet'=>App\GraphQL\Mutation\walet\wallet\updateWallet::class,
                 //saldo
-               'newSaldo'=>App\GraphQL\Mutation\createSaldo::class,
-               'delSaldo'=>App\GraphQL\Mutation\deleteSaldo::class,
-               'updateSaldo'=>App\GraphQL\Mutation\updateSaldo::class,
+               'newSaldo'=>App\GraphQL\Mutation\walet\saldo\createSaldo::class,
+               'delSaldo'=>App\GraphQL\Mutation\walet\saldo\deleteSaldo::class,
+               'updateSaldo'=>App\GraphQL\Mutation\walet\saldo\updateSaldo::class,
                //pricing
-               'newPricing'=>App\GraphQL\Mutation\createPricing::class,
-               'delPricing'=>App\GraphQL\Mutation\deletePricing::class,
-               'updatePricing'=>App\GraphQL\Mutation\updatePricing::class,
+               'newPricing'=>App\GraphQL\Mutation\pricing\createPricing::class,
+               'delPricing'=>App\GraphQL\Mutation\pricing\deletePricing::class,
+               'updatePricing'=>App\GraphQL\Mutation\pricing\updatePricing::class,
                //selling list
-               'newSellingList'=>App\GraphQL\Mutation\createSellingList::class,
-               'delSellingList'=>App\GraphQL\Mutation\deleteSellingList::class,
-               'updateSellingList'=>App\GraphQL\Mutation\updateSellingList::class,
+               'newSellingList'=>App\GraphQL\Mutation\selingList\sellingList\createSellingList::class,
+               'delSellingList'=>App\GraphQL\Mutation\selingList\sellingList\deleteSellingList::class,
+               'updateSellingList'=>App\GraphQL\Mutation\selingList\sellingList\updateSellingList::class,
                //export request
-               'newExportRequest'=>App\GraphQL\Mutation\createExportRequest::class,
-               'delExportRequest'=>App\GraphQL\Mutation\deleteExportRequest::class,
-               'updateExportRequest'=>App\GraphQL\Mutation\updateExportRequest::class,
+               'newExportRequest'=>App\GraphQL\Mutation\selingList\exportRequest\createExportRequest::class,
+               'delExportRequest'=>App\GraphQL\Mutation\selingList\exportRequest\deleteExportRequest::class,
+               'updateExportRequest'=>App\GraphQL\Mutation\selingList\exportRequest\updateExportRequest::class,
                //image
-               'newImage'=>App\GraphQL\Mutation\createImage::class,
-               'delImage'=>App\GraphQL\Mutation\deleteImage::class,
-               'updateImage'=>App\GraphQL\Mutation\updateImage::class,
+               'newImage'=>App\GraphQL\Mutation\warehouse\image\createImage::class,
+               'delImage'=>App\GraphQL\Mutation\warehouse\image\deleteImage::class,
+               'updateImage'=>App\GraphQL\Mutation\warehouse\image\updateImage::class,
                 //pesanan header
-                'newPesananHeader'=>App\GraphQL\Mutation\createPesananHeader::class,
-                'delPesananHeader'=>App\GraphQL\Mutation\deletePesananHeader::class,
-                'updatePesananHeader'=>App\GraphQL\Mutation\updatePesananHeader::class,
+                'newPesananHeader'=>App\GraphQL\Mutation\pesanan\pesananHeader\createPesananHeader::class,
+                'delPesananHeader'=>App\GraphQL\Mutation\pesanan\pesananHeader\deletePesananHeader::class,
+                'updatePesananHeader'=>App\GraphQL\Mutation\pesanan\pesananHeader\updatePesananHeader::class,
                //pesanan detail
-               'newPesananDetail'=>App\GraphQL\Mutation\createPesananDetail::class,
-               'delPesananDetail'=>App\GraphQL\Mutation\deletePesananDetail::class,
-               'updatePesananDetail'=>App\GraphQL\Mutation\updatePesananDetail::class,
+               'newPesananDetail'=>App\GraphQL\Mutation\pesanan\pesananDetail\createPesananDetail::class,
+               'delPesananDetail'=>App\GraphQL\Mutation\pesanan\pesananDetail\deletePesananDetail::class,
+               'updatePesananDetail'=>App\GraphQL\Mutation\pesanan\pesananDetail\updatePesananDetail::class,
               //status
-              'newStatus'=>App\GraphQL\Mutation\createStatus::class,
-              'delStatus'=>App\GraphQL\Mutation\deleteStatus::class,
-              'updateStatus'=>App\GraphQL\Mutation\updateStatus::class,
+              'newStatus'=>App\GraphQL\Mutation\pesanan\status\createStatus::class,
+              'delStatus'=>App\GraphQL\Mutation\pesanan\status\deleteStatus::class,
+              'updateStatus'=>App\GraphQL\Mutation\pesanan\status\updateStatus::class,
              //pengiriman
-             'newPengiriman'=>App\GraphQL\Mutation\createPengiriman::class,
-             'delPesananHeader'=>App\GraphQL\Mutation\deletePengiriman::class,
-             'updatePengiriman'=>App\GraphQL\Mutation\updatePengiriman::class,
+             'newPengiriman'=>App\GraphQL\Mutation\pesanan\pengiriman\createPengiriman::class,
+             'delPesananHeader'=>App\GraphQL\Mutation\pesanan\pengiriman\deletePengiriman::class,
+             'updatePengiriman'=>App\GraphQL\Mutation\pesanan\pengiriman\updatePengiriman::class,
             //status pengiriman
-            'newStatusPengiriman'=>App\GraphQL\Mutation\createStatusPengiriman::class,
-            'delStatusPengiriman'=>App\GraphQL\Mutation\deleteStatusPengiriman::class,
-            'updateStatusPengiriman'=>App\GraphQL\Mutation\updateStatusPengiriman::class,
-           
-                
-                
+            'newStatusPengiriman'=>App\GraphQL\Mutation\pesanan\statusPengiriman\createStatusPengiriman::class,
+            'delStatusPengiriman'=>App\GraphQL\Mutation\pesanan\statusPengiriman\deleteStatusPengiriman::class,
+            'updateStatusPengiriman'=>App\GraphQL\Mutation\pesanan\statusPengiriman\updateStatusPengiriman::class,
+           //pesananUser
+           'pesan'=>App\GraphQL\Mutation\pesananHeaderUser::class,
+            //stok
+            'stokBarang'=>App\GraphQL\Mutation\createBarangPrice::class,   
+            //stokheader full
+            'stokfull'=>App\GraphQL\Mutation\stokHeaderFull::class,   
+            //stokDetail full 
+            'stokDetailfull'=>App\GraphQL\Mutation\stokDetailFull::class,   
+                //cek user
+            'cekUser'=>App\GraphQL\Mutation\cekUser::class,   
+                //barang full
+            'newBarangFull'=>App\GraphQL\Mutation\barangFull::class,   
+                // kategori
+                'newKategori'=>App\GraphQL\Mutation\warehouse\kategori\createKategori::class,
+                'delKategori'=>App\GraphQL\Mutation\warehouse\kategori\deleteKategori::class,
+                'updateKategori'=>App\GraphQL\Mutation\warehouse\kategori\updateKategori::class,
+               // kategoribarang
+               'newKategoriBarang'=>App\GraphQL\Mutation\warehouse\kategori\createKategoriBarang::class,
+               'delKategoriBarang'=>App\GraphQL\Mutation\warehouse\kategori\deleteKategoriBarang::class,
+               'updateKategoriBarang'=>App\GraphQL\Mutation\warehouse\kategori\updateKategoriBarang::class,
+              
                ]
         ]
     ],
@@ -273,8 +307,28 @@ return [
         'App\GraphQL\Type\pesananDetailType',
         'App\GraphQL\Type\statusPengirimanType',
         'App\GraphQL\Type\statusType',
+        'App\GraphQL\Type\User\InputLogin',
+		'App\GraphQL\Type\User\User',
+		'App\GraphQL\Type\User\UserOrganization',
+		'App\GraphQL\Type\User\Login',
+		'App\GraphQL\Type\User\Authorization',
+		'App\GraphQL\Type\User\IUser',
+		'App\GraphQL\Type\User\IUserOrganization',
+        'App\GraphQL\Type\User\IUserOrganizationScope',
+        
+		'App\GraphQL\Type\General\IAlamat',
+		'App\GraphQL\Type\General\Alamat',
 
+        'App\GraphQL\Type\General\IDimensi',
+		'App\GraphQL\Type\General\Dimensi',
     
+		'App\GraphQL\Type\General\IGeolocation',
+        'App\GraphQL\Type\General\Geolocation',
+        
+        'App\GraphQL\Type\kategoriType',
+        'App\GraphQL\Type\kategoribarangType',
+
+
     ],
 
     /*

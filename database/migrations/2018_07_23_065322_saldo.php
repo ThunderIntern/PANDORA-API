@@ -17,6 +17,7 @@ class Saldo extends Migration
             $table->increments('id');
             $table->dateTime('tanggal');
             $table->double('jumlah');
+            $table->boolean('onHold');
             $table->text('keterangan');
             $table->unsignedInteger('id_wallet');
             $table->foreign('id_wallet')->references('id')->on('wallet')->onDelete('cascade');

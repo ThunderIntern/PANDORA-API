@@ -16,6 +16,7 @@ class Pricing extends Migration
         Schema::create('pricing', function (Blueprint $table) {
             $table->increments('id');
             $table->string('sku_barang');
+            // ->unique();
             $table->dateTime('tanggal');
             $table->double('harga');
             $table->double('harga_promo');

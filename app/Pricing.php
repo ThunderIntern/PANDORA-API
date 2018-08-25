@@ -13,6 +13,6 @@ protected $dates = ['deleted_at'];
     protected $fillable = [
         'sku_barang','tanggal','harga','harga_promo'
            ];
-    
+       
           
 }

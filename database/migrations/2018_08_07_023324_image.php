@@ -15,8 +15,8 @@ class Image extends Migration
     {
         Schema::create('image', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('thumbnail');
-            $table->string('image_ori');
+            $table->text('thumbnail');
+            $table->text('image_ori');
             $table->unsignedInteger('id_barang');
             $table->timestamps();
             $table->softDeletes();

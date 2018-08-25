@@ -17,7 +17,7 @@ class gudangQuery extends Query
 
     public function type()
     {
-        return Type::listOf(GraphQL::type('gudangType'));
+        return  Type::ListOf(GraphQL::type('gudangType'));
   
     }
 
@@ -35,8 +35,13 @@ class gudangQuery extends Query
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
+        
         if (isset($args['id'])) {
-            return Gudang::where('id' , $args['id'])->get();
+            $gudang= Gudang::where('id' , $args['id'])->first();
+            //  $alamat=$gudang->alamat;
+            //  $gudang->setAlamatEncode($alamat);
+        
+            return $gudang;
         /* } else if(isset($args['email'])) {
             return User::where('email', $args['email'])->get();
         }else if(isset($args['username'])) {
@@ -45,7 +50,9 @@ class gudangQuery extends Query
             return User::where('password', $args['password'])->get(); 
            */
         }else {
-            return Gudang::all();
+            $gudang= Gudang::all();
+            
+            return  $gudang;
         }
     }
 }
