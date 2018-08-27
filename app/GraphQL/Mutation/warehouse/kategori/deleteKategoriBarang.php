@@ -35,6 +35,6 @@ class deleteKategoriBarang extends Mutation
         $kategori =  KategoriBarang::where('id_barang',$args['id_barang'])->first();
         $kategori->delete();
         return $kategori;
-  //error
+
     }
 }

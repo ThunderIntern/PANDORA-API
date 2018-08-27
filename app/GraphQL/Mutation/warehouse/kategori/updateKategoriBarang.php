@@ -42,6 +42,6 @@ class updateKategoriBarang extends Mutation
       
         $kategorib->save();
         return $kategorib;
-  //error
+
     }
 }
