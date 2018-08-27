@@ -14,8 +14,9 @@ class Kategoribarang extends Migration
     public function up()
     {
         Schema::create('kategoribarang', function (Blueprint $table) {
-            $table->unsignedInteger('id_kategori');
+            $table->increments('id');
             $table->unsignedInteger('id_barang');
+            $table->unsignedInteger('id_kategori');
             $table->foreign('id_kategori')->references('id')->on('kategori')->onDelete('cascade');
             $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade');
    

@@ -11,7 +11,7 @@ class KategoriBarang extends Model
 //   use SoftDeletes;
 // protected $dates = ['deleted_at'];
     protected $fillable = [
-        'id_kategori','id_barang'
+        'id_barang', 'id_kategori'
            ];
     
            public function kategori()

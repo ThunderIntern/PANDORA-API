@@ -8,6 +8,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
 use App\KategoriBarang;
+use App\Kategori;
 class updateKategoriBarang extends Mutation
 {
     protected $attributes = [
@@ -23,8 +24,9 @@ class updateKategoriBarang extends Mutation
     public function args()
     {
         return [
-            'id_kategori'  => [ 'type' => (Type::int())],
             'id_barang'  => [ 'type' => (Type::int())],
+            'id_kategori'  => [ 'type' => (Type::int())],
+    
            
             
            
@@ -32,12 +34,14 @@ class updateKategoriBarang extends Mutation
     }
 
     public function resolve($root, $args, $context, ResolveInfo $info)
-    {
-        $kategori =KategoriBarang::where('id_barang', $args['id_barang'])->first();
-       $args['id_kategori']? $kategori->id_kategori = $args['id_kategori']: '';
+    { 
+        
+        $kategorib =KategoriBarang::where('id_barang', $args['id_barang'])->first();
+       
+        $args['id_kategori']? $kategorib->id_kategori = $args['id_kategori']: '';
       
-        $kategori->save();
-        return $kategori;
+        $kategorib->save();
+        return $kategorib;
   //error
     }
 }
