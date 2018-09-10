@@ -6,13 +6,12 @@ use Folklore\GraphQL\Support\Query;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
-use App\Barang;
+USE App\Barang;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-class barangQuery extends Query
+class barangOfficeQuery extends Query
 {
     protected $attributes = [
-        'name' => 'barangQuery',
+        'name' => 'barangOfficeQuery',
         'description' => 'A query'
     ];
 
@@ -24,13 +23,13 @@ class barangQuery extends Query
     public function args()
     {
         return [
+            'skip' => ['name' => 'skip', 'type' => Type::int()],
+            'take' => ['name' => 'take', 'type' => Type::int()],
             'sku' => ['name' => 'sku', 'type' => Type::string()],
             'id' => ['name' => 'id', 'type' => Type::Int()],
             'sku' => ['name' => 'sku', 'type' => Type::string()],
             'nama' => ['name' => 'nama', 'type' => Type::string()],
-            'skip' => ['name' => 'skip', 'type' => Type::int()],
-            'take' => ['name' => 'take', 'type' => Type::int()],
-        
+           
             'deskripsi' => ['name' => 'deskripsi', 'type' => Type::string()],
             'berat' => ['name' => 'berat', 'type' => Type::Int()],
             'dimensi' => ['name' => 'dimensi', 'type' => Type::string()],
@@ -44,26 +43,44 @@ class barangQuery extends Query
     { if (isset($args['nama'])) {
         $gudang= Barang::with(['pricing' => function($q){
             $q->hariIni(Carbon::now());
-        }])->where('nama','like',$args['nama'].'%')
-        // ->skip($args['skip'])->take($args['take'])
+        }])->wherehas('stokDetail',function($p){
+                $p->where('kuantitas','!=',0);
+        })->where('nama','like','%'.$args['nama'].'%')
+              ->skip($args['skip'])->take($args['take'])
             ->get();
     
         return $gudang;
-    }else if(isset($args['sku'])){
+    }else if(isset($args['id'])) {
         $gudang= Barang::with(['pricing' => function($q){
             $q->hariIni(Carbon::now());
-        }])->where('sku','like',$args['sku'].'%')
-        // ->skip($args['skip'])->take($args['take'])
+        }])->wherehas('stokDetail',function($p){
+                $p->where('kuantitas','!=',0);
+        })->where('id',$args['id'])
+            //   ->skip($args['skip'])->take($args['take'])
             ->get();
-    
-        return $gudang;
-    }
-        return Barang::with(['pricing' => function($q){
+            return $gudang;
+    }else if(isset($args['sku'])) {
+        $gudang= Barang::with(['pricing' => function($q){
             $q->hariIni(Carbon::now());
-        }])
+        }])->wherehas('stokDetail',function($p){
+                $p->where('kuantitas','!=',0);
+        })->where('sku',$args['sku'])
+            //   ->skip($args['skip'])->take($args['take'])
             ->get();
-            // ->wherehas('stokDetail',function($p){
-            //     $p->where('kuantitas','!=',0);})
+            return $gudang;
+    }
+    else{
+        $barang= Barang::with(['pricing' => function($q){
+            $q->hariIni(Carbon::now());
+        }]) ->wherehas('stokDetail',function($p){
+            $p->where('kuantitas','!=',0);})
+            ->skip($args['skip'])->take($args['take'])
+            ->get();
+               
+            
+      return $barang;
+           
     }
 }
 
+}

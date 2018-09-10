@@ -23,7 +23,7 @@ class walletQuery extends Query
     {
         return [
             'id' => ['name' => 'id', 'type' => Type::Int()],
-            'user_id' => ['name' => 'user_id', 'type' => Type::string()],
+            'id_user' => ['name' => 'user_id', 'type' => Type::string()],
             'nomer_rekening' => ['name' => 'nomer_rekening', 'type' => Type::string()],
             
            

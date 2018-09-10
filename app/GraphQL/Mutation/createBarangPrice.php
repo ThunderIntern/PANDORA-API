@@ -72,7 +72,7 @@ class createBarangPrice extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
-        DB::BeginTransaction();
+        // DB::BeginTransaction();
         $barang = new b();
         $image=new i();
         $pricing=new p();
@@ -102,7 +102,7 @@ class createBarangPrice extends Mutation
         $stokDetail->kuantitas=$args['kuantitas'];
         $stokDetail->satuan=$args['satuan'];
         $stokDetail->save();
-        DB::Commit();
+        // DB::Commit();
         return $barang;
     }
 }

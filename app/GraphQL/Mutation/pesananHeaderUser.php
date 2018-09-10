@@ -8,7 +8,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
 use Illuminate\Support\Facades\DB;
-
+use App\Barang;
 use App\PesananHeader as ph;
 use App\PesananDetail as pd;
 use App\Status as s;
@@ -29,12 +29,12 @@ class pesananHeaderUser extends Mutation
     public function args()
     {
         return [
-            'sku' => ['name' => 'sku', 'type' => Type::string()],
+            'id_barang' => ['name' => 'id_barang', 'type' => Type::int()],
             'nama_penerima' => ['name' => 'nama_penerima', 'type' => Type::string()],
             'biodata_penerima' => ['name' => 'biodata_penerima', 'type' => GraphQL::type('IAlamat')],
             'jumlah_barang' => ['name' => 'jumlah_barang', 'type' => Type::Int()],
             'id_user' => ['name' => 'id_user', 'type' => Type::string()],
-            'tanggal' => ['name' => 'tanggal', 'type' => Type::string()],
+            
         ];
     }
 
@@ -47,9 +47,12 @@ class pesananHeaderUser extends Mutation
         $status=new s();
         $pengiriman =new pengiriman();
         
+      //cekbar
+      $cekbar=Barang::select('sku')->where('id',$args['id_barang'])->first();
+      
         //cek harga barang
-        $hargaBarang=p::where('sku_barang','=',$args['sku'])->first();    
-        
+        $hargaBarang=p::where('sku_barang','=',$cekbar->sku)->first();    
+
         //inisiasi variabel untuk generate nomor 
         $dt=date('Y.dm.');
         $cek=count(ph::where('nomor','LIKE', $dt.'%')->get());
@@ -57,15 +60,16 @@ class pesananHeaderUser extends Mutation
         $nomor=$dt."S".$number;
         $dates=date('Y-m-d H:i:s');
         //1.buat pesanan header
-        $PesananHeader->tanggal=$args['tanggal'];
+        $PesananHeader->tanggal=$dates;
         $PesananHeader->nomor=$nomor;
         $PesananHeader->id_user=$args['id_user'];
         $PesananHeader->ongkos_kirim=200000;
         $PesananHeader->save();
-    
+        
         //2.buat pesanan detail
-        $pesananDetail->id_pesanan_header=$PesananHeader->id;
-        $pesananDetail->sku=$args['sku'];
+        $pesananDetail->id_pesanan_header=$PesananHeader->id;     
+       $pesananDetail->sku = $cekbar->sku;
+   
         $pesananDetail->jumlah_barang=$args['jumlah_barang'];
         $pesananDetail->harga=$hargaBarang->harga;
         $pesananDetail->harga_promo=$hargaBarang->harga_promo;
@@ -79,6 +83,7 @@ class pesananHeaderUser extends Mutation
         
         //cek pesanan header
         $barang=pd::where('id_pesanan_header','=', $PesananHeader->id)->first();
+       
         
         //alur memasukkan harga
         if($pesananDetail->harga_promo != 0){
@@ -87,7 +92,7 @@ class pesananHeaderUser extends Mutation
             $jumlah=$barang->jumlah_barang;
             $ongkir=$PesananHeader->ongkos_kirim;
             $PesananHeader->total=($harga*$jumlah)+$ongkir;
-                
+            
         }else{
                 $harga=$barang->harga;
                 $jumlah=$barang->jumlah_barang;
@@ -105,20 +110,21 @@ class pesananHeaderUser extends Mutation
             
             //menjalankan event potong saldo
             $PesananHeader->save();
+            
             $idph=$PesananHeader->id;
+         
             $event = event(new onHoldEvent($idph));
               if($event==true){
                 $PesananHeader->save(); 
                 $pesananDetail->save();
                 $status->save();
-            
+             
                 DB::Commit();
           
-       
+               
                 return $PesananHeader;
 
              }else{
-                 
                 DB::Rollback();
                 
                 }

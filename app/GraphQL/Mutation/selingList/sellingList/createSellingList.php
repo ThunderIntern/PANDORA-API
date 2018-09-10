@@ -24,7 +24,7 @@ class createSellingList extends Mutation
         return [
          
                
-            'user_id' => [
+            'id_user' => [
                 'type' => Type::string()
             ],
             'sku_barang'=>[
@@ -40,7 +40,9 @@ class createSellingList extends Mutation
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
         $selling = new SellingList();
-        $selling->fill($args);
+        $selling->id_user=$args['id_user'];
+        $selling->harga=$args['harga'];
+        $selling->sku_barang=$args['sku_barang'];
         $selling->save();
         return $selling;
     }

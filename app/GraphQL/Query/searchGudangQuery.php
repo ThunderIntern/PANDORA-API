@@ -7,17 +7,16 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
 use App\Gudang;
-
-class gudangQuery extends Query
+class searchGudangQuery extends Query
 {
     protected $attributes = [
-        'name' => 'gudangQuery',
+        'name' => 'searchGudangQuery',
         'description' => 'A query'
     ];
 
     public function type()
     {
-        return  Type::ListOf(GraphQL::type('gudangType'));
+        return  (GraphQL::type('gudangType'));
   
     }
 
@@ -28,9 +27,7 @@ class gudangQuery extends Query
             
             'nama' => ['name' => 'nama', 'type' => Type::string()],
             'alamat'  => [ 'type' => GraphQL::type('IAlamat')],
-            'skip' => ['name' => 'skip', 'type' => Type::int()],
-            'take' => ['name' => 'take', 'type' => Type::int()],
-        
+            
            
         ];
     }
@@ -39,15 +36,15 @@ class gudangQuery extends Query
     {
         
         if (isset($args['nama'])) {
-            $gudang= Gudang::where('nama' ,'like', $args['nama'].'%') 
-            ->skip($args['skip'])->take($args['take'])->get();
+            $gudang= Gudang::where('nama' , $args['nama'])->first();
         
             return $gudang;
      
-
+        }else if(isset($args['alamat'])) {
+            return User::where('alamat', $args['alamat'])->get(); 
+           
         }else {
-            $gudang= Gudang::select('id','nama','alamat')
-            ->skip($args['skip'])->take($args['take'])->get();
+            $gudang= Gudang::all();
             
             return  $gudang;
         }

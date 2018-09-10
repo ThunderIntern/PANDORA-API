@@ -16,6 +16,9 @@ class kategoribarangType extends BaseType
     public function fields()
     {
         return [
+            'id' => [
+                'type' => Type::Int()
+            ],
             'id_barang' => [
                 'type' => Type::Int()
             ],
@@ -24,7 +27,23 @@ class kategoribarangType extends BaseType
                 'type' => Type::Int()
             ],
                       
-           
+            'kategori_nama' => [
+                'args' => [
+                    'id' => [
+                        'type'        => Type::Int(),
+                        'description' => 'id pesanan',
+                    ],
+                ],
+                'type' => (GraphQL::type('kategoriType')),
+                
+                'resolve' => function ($root, $args) {
+                    if (isset($args['id_kategori'])) {
+                        return  $root->kategori->where('id', $args['id_kategori']);
+                    }
+
+                    return $root->kategori;
+                }
+            ],
         ];
     }
 }

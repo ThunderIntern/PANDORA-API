@@ -22,15 +22,22 @@ class createKategori extends Mutation
     public function args()
     {
         return [
-            'kategori'  => [ 'type' => (Type::string())],
-           
+            'nama'  => [ 'type' => (Type::string())],
+            'jenis'  => [ 'type' => (Type::string())],
+            'id_parent'		=> 	[
+                'name' 	=> 'id_parent', 
+                'type' 	=> Type::Int(),
+                'rules' => ['nullable', 'integer'],
+            ],   
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
         $kategori = new Kategori();
-        $kategori->fill($args);
+        $kategori->nama=$args['nama'];
+        $kategori->jenis=$args['jenis'];
+       $args['id_parent']? $kategori->id_parent = $args['id_parent']: '';       $args['id_parent']?  $kategori->id_parent=  $args['id_parent']:'';
         $kategori->save();
         return $kategori;
   

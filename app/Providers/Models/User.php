@@ -92,5 +92,9 @@ class User extends Model
 
 	public function voucherlist(){
     	return $this->hasMany('Thunderlabid\Voucher\Models\Voucher','owner_id');
+	}
+	
+	public function wallet(){
+    	return $this->hasOne('App\Wallet','id_user','id');
     }
 }

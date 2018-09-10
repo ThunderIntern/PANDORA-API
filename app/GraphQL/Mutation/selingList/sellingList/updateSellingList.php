@@ -26,7 +26,7 @@ class updateSellingList extends Mutation
              'type' => Type::nonNull(Type::Int())
          ],
               
-         'user_id' => [
+         'id_user' => [
             'type' => Type::string()
         ],
         'sku_barang'=>[

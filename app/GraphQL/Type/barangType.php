@@ -5,6 +5,11 @@ namespace App\GraphQL\Type;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as BaseType;
 use GraphQL;
+use App\Barang;
+use App\Pricing;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 class barangType extends BaseType
 {
 
@@ -16,12 +21,13 @@ class barangType extends BaseType
     public function fields()
     {
         return [
+ 
             'sku'=>[
                 'type'=> Type::string()
                 
             ],
             'id' => [
-                'type' => Type::nonNull(Type::Int())
+                'type' => (Type::Int())
             ],
             
             'nama' => [
@@ -37,61 +43,17 @@ class barangType extends BaseType
                 'type'=> Type::string()
             ],
             'pricing' => [
-                'args' => [
                 
-                    'sku_barang'=> [
-                        'type'        => Type::string(),
-                        'description' => 'id pesanan',
-                    ],
-                    'harga' => [
-                        'type'        => Type::string(),
-                        'description' => 'id pesanan',
-                    ],
-                    'harga_promo' => [
-                        'type'        => Type::string(),
-                        'description' => 'id pesanan',
-                    ],
-                    
-                ],
-                'type' => (GraphQL::type('pricingType')),
-                
-                'resolve' => function ($root, $args) {
-                     if(isset($args['sku_barang'])) {
-     
-                        return  $root->pricing->where(['sku_barang'],$args['sku_barang'],'and','tanggal','<=',date('Y-m-d H:i:s'))->orderBy('tanggal','desc')->first();
-                    }   else if(isset($args['harga'])) {
-                        return  $root->pricing->where('harga', $args['harga'],'and','tanggal','<=',date('Y-m-d H:i:s'))->orderBy('tanggal','desc')->first();
-                    }   else if(isset($args['harga_promo'])) {
-                        return  $root->pricing->where('harga_promo', $args['harga_promo'],'and','tanggal','<=',date('Y-m-d H:i:s'))->orderBy('tanggal','desc')->first();
-                    } 
-                    return $root->pricing->where('tanggal','<=',date('Y-m-d H:i:s'))->orderBy('tanggal','desc')->first();
-                }
+                'type' => (GraphQL::type('pricingType'))                
             ],
-          
             'stokDetail' => [
-                'args' => [
-                    'id' => [
-                        'type'        => Type::Int(),
-                        'description' => 'id pesanan',
-                    ],
-                ],
-                'type' => (GraphQL::type('stokDetailType')),
                 
-                'resolve' => function ($root, $args) {
-                    if (isset($args['id'])) {
-                        return  $root->stokDetail->where('id_barang', $args['id'],'and');
-                    }
-
-                    return $root->stokDetail;
-                }
+                'type' => type::listOf(GraphQL::type('stokDetailType'))                
             ],
+     
             'image' => [
-                'args' => [
-                    'id' => [
-                        'type'        => Type::Int(),
-                        'description' => 'id pesanan',
-                    ],
-                ],
+                
+                
                 'type' => Type::listOf(GraphQL::type('imageType')),
                 
                 'resolve' => function ($root, $args) {
@@ -100,6 +62,42 @@ class barangType extends BaseType
                     }
 
                     return $root->image;
+                }
+            ],
+            
+            'pricing' => [
+                
+                
+                'type' => (GraphQL::type('pricingType')),
+                
+                'resolve' => function ($root, $args) {
+                   
+
+                    return $root->pricing;
+                }
+            ],
+            
+            'stokDetail' => [
+                
+                
+                'type' => (GraphQL::type('stokDetailType')),
+                
+                'resolve' => function ($root, $args) {
+                  
+
+                    return $root->stokDetail;
+                }
+            ],
+            'kategori' => [
+                
+                'type' => Type::ListOf(GraphQL::type('kategoribarangType')),
+                
+                'resolve' => function ($root, $args) {
+                    if (isset($args['id_barang'])) {
+                        return  $root->kategoribarang->where('id_barang', $args['id_barang']);
+                    }
+
+                    return $root->kategoribarang;
                 }
             ],
         ];

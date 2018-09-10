@@ -20,10 +20,22 @@ class kategoriType extends BaseType
                 'type' => Type::nonNull(Type::Int())
             ],
                
-            'kategori' => [
+            'nama' => [
                 'type' => Type::string()
             ],
-                      
+            'jenis' => [
+                'type' => Type::string()
+            ],
+            'id_parent'		=> 	[
+                'name' 	=> 'id_parent', 
+                'type' 	=> Type::Int(),
+                'rules' => ['nullable', 'integer'],
+            ],    
+            'kategori'		=> 	[
+                'name' 	=> 'kategori', 		
+                'type' 	=> Type::string(),
+                'rules' => ['nullable', 'string'],
+            ],     
            
         ];
     }

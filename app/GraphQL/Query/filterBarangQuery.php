@@ -1,16 +1,16 @@
 <?php
 
 namespace App\GraphQL\Query;
-
+use Illuminate\Support\Facades\DB;
 use Folklore\GraphQL\Support\Query;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
 use App\Kategori;
-class kategoriQuery extends Query
+class filterBarangQuery extends Query
 {
     protected $attributes = [
-        'name' => 'kategoriQuery',
+        'name' => 'filterBarangQuery',
         'description' => 'A query'
     ];
 
@@ -22,19 +22,24 @@ class kategoriQuery extends Query
 
     public function args()
     {
-return [
+        return [
             'id' => ['name' => 'id', 'type' => Type::Int()],
             'nama' => [ 'type' => Type::string()],
             'jenis' => [ 'type' => Type::string()],
-        
-             
+            'kategori'		=> 	[
+                'name' 	=> 'kategori', 		
+                'type' 	=> Type::string(),
+                'rules' => ['nullable', 'string'],
+            ],
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
         
-            return Kategori::where('jenis','kategori')->get();
+            $kategori= Kategori::where('nama','like',$args['kategori'].'%')->first();
+            $filter=Kategori::where('id_parent',$kategori->id)->get();
+            return $filter;
         }
     }
 

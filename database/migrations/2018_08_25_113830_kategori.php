@@ -15,7 +15,11 @@ class Kategori extends Migration
     {
         Schema::create('kategori', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kategori');
+            $table->string('nama')->unique();
+            $table->string('jenis');
+            $table->unsignedInteger('id_parent')->nullable();
+            $table->foreign('id_parent')->references('id')->on('kategori')->onDelete('cascade');
+      
             $table->timestamps();
             $table->softDeletes();
         });

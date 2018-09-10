@@ -20,7 +20,7 @@ class sellingListType extends BaseType
                 'type' => Type::nonNull(Type::Int())
             ],
                
-            'user_id' => [
+            'id_user' => [
                 'type' => Type::string()
             ],
             'sku_barang' => [
@@ -30,7 +30,16 @@ class sellingListType extends BaseType
             'harga' => [
                 'type' => Type::Int()
             ],
-            
+            'barang' => [
+              
+                'type' => (GraphQL::type('barangType')),
+                
+                'resolve' => function ($root, $args) {
+                  
+
+                    return $root->barang;
+                }
+            ],
         ] ;          
           
     }}

@@ -60,7 +60,15 @@ class walletType extends BaseType
 
                     return $root->pesananeHeader;
                 }
-            ]
+            ],
+            'user' => [
+              
+                'type' =>    (GraphQL::type('User')),
+                
+                'resolve' => function ($root, $args) {
+                    return $root->user;
+                }
+            ],
         ];
     }
 }

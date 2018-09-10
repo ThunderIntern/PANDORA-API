@@ -9,6 +9,8 @@ use App\PesananHeader as ph;
 use App\Wallet as w;
 use App\Saldo as s;
 use App\Status as status;
+use App\Providers\Models\User;
+
 class onHoldListener
 {
     /**
@@ -34,26 +36,28 @@ class onHoldListener
 
        $pesananHeader=ph::where('id',$id)->first();
        $id_user=$pesananHeader->id_user;
-      
-       $wallet=w::where('id_user',$id_user)->first();
+       
+        $iduser=User::where('username',$id_user)->first();
+       $wallet=w::where('id_user',$iduser->id)->first();
+   
        //get saldo
        $idw=$wallet->id;
        $saldo=s::where('id_wallet',$idw)->get();
-      
+  
    
         //cek status pesanan
        
        
        $status=status::where('id_pesanan_header',$id)->first();
       $cek=$status->status;
-     
+      
  
        if($cek=="Ordering" ) {
         $cekSaldo=$saldo->sum('jumlah');
-
-     
+    
+        
         $hargaPesanan=$pesananHeader->total;
-
+     
         if($cekSaldo>$hargaPesanan){
         $transaksi = new s();
         $transaksi->id_wallet=$idw;

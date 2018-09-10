@@ -16,6 +16,10 @@ class KategoriBarang extends Model
     
            public function kategori()
     {
-        return $this->belongsTo('App\Kategori', 'id_kategori');
+        return $this->  belongsTo('App\Kategori', 'id_kategori');
+    }
+    public function barang()
+    {
+        return $this->belongsTo('App\Barang', 'id_barang');
     }
 }

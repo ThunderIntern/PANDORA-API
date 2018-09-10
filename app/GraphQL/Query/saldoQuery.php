@@ -22,20 +22,17 @@ class saldoQuery extends Query
     public function args()
     {
         return [
-            'id' => ['name' => 'id', 'type' => Type::Int()],
-            'id_wallet' => ['name' => 'id_wallet', 'type' => Type::Int()],
-            'tanggal' => ['name' => 'tanggal', 'type' => Type::string()],
-            'keterangan' => ['name' => 'keterangan', 'type' => Type::string()],
-            'jumlah' => ['name' => 'jumlah', 'type' => Type::Int()],
-            
+
+            'skip' => ['name' => 'skip', 'type' => Type::int()],
+            'take' => ['name' => 'take', 'type' => Type::int()],
            
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
-        if (isset($args['id'])) {
-            return Saldo::where('id' , $args['id'])->get();
+        // if (isset($args['id'])) {
+        //     return Saldo::where('id' , $args['id'])->get();
         /* } else if(isset($args['email'])) {
             return User::where('email', $args['email'])->get();
         }else if(isset($args['username'])) {
@@ -43,8 +40,8 @@ class saldoQuery extends Query
         }else if(isset($args['password'])) {
             return User::where('password', $args['password'])->get(); 
            */
-        }else {
-            return Saldo::all();
-        }
+        // }else {
+            return Saldo::select('id','tanggal','id_wallet','jumlah','keterangan','onHold')->skip($args['skip'])->take($args['take'])->orderby('tanggal','desc')->get();
+        // }
     }
 }

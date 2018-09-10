@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Carbon\Carbon;
 class Barang extends Model 
 {
   public $table= "barang";
@@ -15,12 +15,17 @@ protected $dates = ['deleted_at'];
         'nama','deskripsi','sku','dimensi','berat'
           ];
     public function pricing(){
-        return $this->hasOne('App\Pricing','sku_barang','sku');
-           // ->where('sku_barang','=',,'and','tanggal','<=',date('Y-m-d H:i:s'))->orderBy('tanggal','desc')->first();
-        // $return = Pricing::whereHas('sku_barang', '=','sku')->get();
-        // return $return;
+        return $this->hasOne('App\Pricing','sku_barang','sku')
+        ->orderby('tanggal','desc');
     }
-   
+    public function sellinglist(){
+        return $this->hasOne('App\SellingList','sku_barang','sku');
+ 
+    }
+    public function current_price(){
+        return $this->hasOne('App\Pricing','sku_barang','sku')->where('tanggal', '<=', Carbon::now())->orderby('tanggal','desc');
+    }
+
     public function stokDetail(){
         return $this->hasMany('App\StokDetail', 'id_barang');
     }

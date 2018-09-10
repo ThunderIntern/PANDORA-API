@@ -23,20 +23,17 @@ class pesananHeaderQuery extends Query
     public function args()
     {
         return [
-            'id' => ['name' => 'id', 'type' => Type::Int()],
-            'nomor' => ['name' => 'nomor', 'type' => Type::string()],
-            'tanggal' => ['name' => 'tanggal', 'type' => Type::string()],
            
-            'total' => ['name' => 'total', 'type' => Type::Int()],
-            'ongkos_kirim' => ['name' => 'ongkos_kirim', 'type' => Type::Int()],
+            'username' => ['name' => 'username', 'type' => Type::string()],
+         
             
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
-        if (isset($args['id'])) {
-            return PesananHeader::where('id' , $args['id'])->get();
+        if (isset($args['username'])) {
+            return PesananHeader::where('id_user' , $args['username'])->get();
         /* } else if(isset($args['email'])) {
             return User::where('email', $args['email'])->get();
         }else if(isset($args['username'])) {

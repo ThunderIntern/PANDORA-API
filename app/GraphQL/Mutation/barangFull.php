@@ -1,7 +1,7 @@
 <?php
 
 namespace App\GraphQL\Mutation;
-
+use Illuminate\Support\Facades\DB;
 use Folklore\GraphQL\Support\Mutation;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
@@ -9,6 +9,9 @@ use GraphQL;
 use App\Barang as b;
 use App\Image as i;
 use App\Pricing as p;
+use App\Kategori as k;
+use App\KategoriBarang as kb;
+
 class barangFull extends Mutation
 {
     protected $attributes = [
@@ -18,7 +21,7 @@ class barangFull extends Mutation
 
     public function type()
     {
-        return Type::ListOf(GraphQL::type('barangType'));  
+        return (GraphQL::type('barangType'));  
     }
 
     public function args()
@@ -36,7 +39,7 @@ class barangFull extends Mutation
                 'type'=> Type::string()
             ],
             'dimensi'=>[
-                'type'=>  type::listOf(GraphQL::type('IDimensi'))
+                'type'=> (GraphQL::type('IDimensi'))
             ],
             'berat'=>[
                 'type'=> Type::Int()
@@ -53,6 +56,9 @@ class barangFull extends Mutation
             'image_ori'=>[
                 'type'=> Type::string()
             ],
+            'kategori'=>[
+                'type'=> Type::string()
+            ],
         
         ];
     }
@@ -63,7 +69,8 @@ class barangFull extends Mutation
         $barang = new b();
         $image=new i();
         $pricing=new p();
-        
+        $kategori=k::where('nama','like',$args['kategori'].'%')->first();
+        $kategorib=new kb();
 
          $dates=date('Y-m-d H:i:s');
         $barang->nama=$args['nama_barang'];
@@ -83,7 +90,12 @@ class barangFull extends Mutation
         $pricing->harga=$args['harga'];
         $pricing->harga_promo=$args['harga_promo'];
         $pricing->save();
-      
+
+
+
+        $kategorib->id_barang=$barang->id;
+        $kategorib->id_kategori=$kategori->id;
+        $kategorib->save();
         DB::Commit();
         return $barang;
     }

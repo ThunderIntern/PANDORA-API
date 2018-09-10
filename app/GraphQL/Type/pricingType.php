@@ -32,7 +32,23 @@ class pricingType extends BaseType
             'harga_promo' => [
                 'type' => Type::Int()
             ],
-           
+            'barang' => [
+                'args' => [
+                    'id' => [
+                        'type'        => Type::Int(),
+                        'description' => 'id pesanan',
+                    ],
+                ],
+                'type' => Type::listOf(GraphQL::type('barangType')),
+                
+                'resolve' => function ($root, $args) {
+                    if (isset($args['sku_barang'])) {
+                        return  $root->barang->where('sku', $args['sku_barang']);
+                    }
+
+                    return $root->barang;
+                }
+            ],
         ];          
           
     }}

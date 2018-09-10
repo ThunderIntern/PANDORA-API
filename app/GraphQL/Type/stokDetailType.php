@@ -17,7 +17,7 @@ class stokDetailType extends BaseType
     {
         return [
             'id' => [
-                'type' => Type::nonNull(Type::Int())
+                'type' => (Type::Int())
             ],
             'id_barang' => [
                 'type' =>(Type::Int())

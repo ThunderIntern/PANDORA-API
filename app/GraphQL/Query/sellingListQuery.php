@@ -24,7 +24,7 @@ class sellingListQuery extends Query
     {
         return [
             'id' => ['name' => 'id', 'type' => Type::Int()],
-            'user_id' => ['name' => 'user_id', 'type' => Type::string()],
+            'id_user' => ['name' => 'user_id', 'type' => Type::string()],
             'sku_barang' => ['name' => 'sku_barang', 'type' => Type::string()],
             'harga' => ['name' => 'harga', 'type' => Type::Int()],
             

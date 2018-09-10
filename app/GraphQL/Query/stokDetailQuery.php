@@ -38,9 +38,9 @@ class stokDetailQuery extends Query
     {
         if (isset($args['id_stok_header'])) {
             return StokDetail::where('id_stok_header' , $args['id_stok_header'])->get();
-         } else if(isset($args['id'])) {
-            return StokDetail::where('id', $args['id'])->get();
-        // }
+        //  } else if(isset($args['id'])) {
+        //     return StokDetail::where('id', $args['id'])->get();
+        // // }
         // else if(isset($args['username'])) {
         //     return User::where('username', $args['username'])->get(); 
         // }else if(isset($args['password'])) {

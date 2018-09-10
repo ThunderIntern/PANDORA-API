@@ -130,6 +130,7 @@ return [
                 'stokHeader'=>App\GraphQL\Query\stokHeaderQuery::class,
                 'gudang'=>App\GraphQL\Query\gudangQuery::class,
                 'barang'=>App\GraphQL\Query\barangQuery::class,
+                'searchSkuBarang'=>App\GraphQL\Query\barangQuery::class,
                 'wallet'=>App\GraphQL\Query\walletQuery::class,
                 'saldo'=>App\GraphQL\Query\saldoQuery::class,
                 'pricing'=>App\GraphQL\Query\pricingQuery::class,
@@ -143,6 +144,17 @@ return [
                 'pengiriman'=>App\GraphQL\Query\pengirimanQuery::class,
                 'kategori'=>App\GraphQL\Query\kategoriQuery::class,
                 'kategoribarang'=>App\GraphQL\Query\kategoribarangQuery::class,
+                'perbarang'=>App\GraphQL\Query\perbarangQuery::class,
+                'barangOffice'=>App\GraphQL\Query\barangOfficeQuery::class,
+                'filter'=>App\GraphQL\Query\filterBarangQuery::class,
+                'countBarangOffice'=>App\GraphQL\Query\countBarangOfficeQuery::class,
+                'searchGudang'=>App\GraphQL\Query\searchGudangQuery::class,
+                'searchingBarangOffice'=>App\GraphQL\Query\barangOfficeQuery::class,
+                'countSearchingBarangOffice'=>App\GraphQL\Query\countSearchingBarangOfficeQuery::class,
+                'detailBarangOffice'=>App\GraphQL\Query\barangOfficeQuery::class,
+                'countGudang'=>App\GraphQL\Query\countGudangQuery::class,
+                'countSaldo'=>App\GraphQL\Query\countSaldo::class,
+                'tampilKatalog'=>App\GraphQL\Query\tampilKatalogQuery::class,
 
             ],
             'mutation' => [
@@ -238,7 +250,11 @@ return [
                'newKategoriBarang'=>App\GraphQL\Mutation\warehouse\kategori\createKategoriBarang::class,
                'delKategoriBarang'=>App\GraphQL\Mutation\warehouse\kategori\deleteKategoriBarang::class,
                'updateKategoriBarang'=>App\GraphQL\Mutation\warehouse\kategori\updateKategoriBarang::class,
-              
+               // updatebarangfull
+               'updateBarangFull'=>App\GraphQL\Mutation\updateBarangFull::class,
+                //katalog
+                'katalog'=>App\GraphQL\Mutation\tampilKatalog::class,
+
                ]
         ]
     ],
@@ -327,6 +343,9 @@ return [
         
         'App\GraphQL\Type\kategoriType',
         'App\GraphQL\Type\kategoribarangType',
+        
+        'App\GraphQL\Type\countBarangOfficeType',
+        'App\GraphQL\Type\countGudangType',
 
 
     ],

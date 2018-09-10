@@ -11,7 +11,7 @@ class Wallet extends Model
   use SoftDeletes;
 protected $dates = ['deleted_at'];
     protected $fillable = [
-     'user_id','nomer_rekening'
+     'id_user','nomer_rekening'
           ];
     
 
@@ -21,5 +21,9 @@ protected $dates = ['deleted_at'];
     }
     public function pesananHeader(){
         return $this->hasOne('App\PesananHeader','id_user','id_user');
+    }
+
+    public function user(){
+    	return $this->hasOne('App\Providers\Models\User','id','id_user');
     }
 }
