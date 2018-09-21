@@ -45,7 +45,7 @@ class barangQuery extends Query
         $gudang= Barang::with(['pricing' => function($q){
             $q->hariIni(Carbon::now());
         }])->where('nama','like',$args['nama'].'%')
-        // ->skip($args['skip'])->take($args['take'])
+        ->skip($args['skip'])->take($args['take'])
             ->get();
     
         return $gudang;

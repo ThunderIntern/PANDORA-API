@@ -22,14 +22,17 @@ class countGudangQuery extends Query
     public function args()
     {
         return [
-            'jumlah' => ['name' => 'jumlah', 'type' => Type::Int()],
+            'nama' => ['name' => 'nama', 'type' => Type::string()],
         ];
     }   
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
-        $gudang= Gudang::select('id','nama','alamat')
-       ->count();
+       
+            $gudang= Gudang::where('nama' ,'like', $args['nama'].'%') 
+            ->count();        
+           
+
        if($gudang % 2 == 1){
         $jumlahh=$gudang+1;
         return ['jumlah' => $jumlahh];

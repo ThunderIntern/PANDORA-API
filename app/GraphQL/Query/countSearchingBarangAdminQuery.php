@@ -7,11 +7,10 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
 use App\Barang;
-use Carbon\Carobon;
-class countSearchingBarangOfficeQuery extends Query
+class countSearchingBarangAdminQuery extends Query
 {
     protected $attributes = [
-        'name' => 'countSearchingBarangQuery',
+        'name' => 'countBarangAdmin',
         'description' => 'A query'
     ];
 
@@ -23,24 +22,22 @@ class countSearchingBarangOfficeQuery extends Query
     public function args()
     {
         return [
-            'jumlah' => ['name' => 'jumlah', 'type' => Type::Int()],
+             'skip' => ['name' => 'skip', 'type' => Type::int()],
+            'take' => ['name' => 'take', 'type' => Type::int()],
             'nama' => ['name' => 'nama', 'type' => Type::string()],
-            
+
         ];
     }   
 
     public function resolve($root, $args, $context, ResolveInfo $info)
-    {
+    {if (isset($args['nama'])) {
         $gudang= Barang::with(['pricing' => function($q){
             $q->hariIni(Carbon::now());
-        }])->wherehas('stokDetail',function($p){
-                $p->where('kuantitas','!=',0);
-        })->where('nama','like','%'.$args['nama'].'%')
-             // ->skip($args['skip'])->take($args['take'])
+        }])->where('nama','like',$args['nama'].'%')
+        // ->skip($args['skip'])->take($args['take'])
             ->count();
-         
-             return ['jumlah' => $gudang];
-            
-        
+    
+            return ['jumlah' => $gudang];
     }
+}
 }

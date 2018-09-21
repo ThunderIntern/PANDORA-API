@@ -18,5 +18,9 @@ protected $dates = ['deleted_at'];
     {
         return $this->hasMany('App\KategoriBarang', 'id_kategori');
     }
-   
+    public function kategori()
+    {
+        return $this->hasMany('App\Kategori','id_parent', 'id')
+      ;
+    }
 }

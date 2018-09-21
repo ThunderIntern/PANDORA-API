@@ -6,7 +6,7 @@ use Folklore\GraphQL\Support\Mutation;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
-use App\StokHeader;
+use App\StokHeader ;
 class createStokHeader extends Mutation
 {
     protected $attributes = [
@@ -34,7 +34,7 @@ class createStokHeader extends Mutation
     {
         $stokHeader = new StokHeader();
         $dt=date('Y.dm.');
-        $cek=count(sh::where('nomor','LIKE', $dt.'%')->get());
+        $cek=count(StokHeader::where('nomor','LIKE', $dt.'%')->get());
         $number= str_pad($cek+1, 4, '0', STR_PAD_LEFT);
         $nomor=$dt."P".$number;
        

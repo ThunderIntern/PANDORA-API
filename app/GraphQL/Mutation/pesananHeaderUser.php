@@ -14,6 +14,8 @@ use App\PesananDetail as pd;
 use App\Status as s;
 use App\Pricing as p;
 use App\Pengiriman ;
+use App\Providers\Models\User;
+
 class pesananHeaderUser extends Mutation
 {
     protected $attributes = [
@@ -47,11 +49,13 @@ class pesananHeaderUser extends Mutation
         $status=new s();
         $pengiriman =new pengiriman();
         
-      //cekbar
-      $cekbar=Barang::select('sku')->where('id',$args['id_barang'])->first();
+        //cekbar
+         $cekbar=Barang::select('sku')->where('id',$args['id_barang'])->first();
       
         //cek harga barang
         $hargaBarang=p::where('sku_barang','=',$cekbar->sku)->first();    
+        //cek user
+        $iduser=User::where('username',$args['id_user'])->first();
 
         //inisiasi variabel untuk generate nomor 
         $dt=date('Y.dm.');
@@ -62,7 +66,7 @@ class pesananHeaderUser extends Mutation
         //1.buat pesanan header
         $PesananHeader->tanggal=$dates;
         $PesananHeader->nomor=$nomor;
-        $PesananHeader->id_user=$args['id_user'];
+        $PesananHeader->id_user=$iduser->id;
         $PesananHeader->ongkos_kirim=200000;
         $PesananHeader->save();
         

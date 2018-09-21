@@ -7,6 +7,9 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
 use App\SellingList;
+use App\Barang;
+use App\Providers\Models\User;
+
 class createSellingList extends Mutation
 {
     protected $attributes = [
@@ -27,8 +30,8 @@ class createSellingList extends Mutation
             'id_user' => [
                 'type' => Type::string()
             ],
-            'sku_barang'=>[
-                'type'=> Type::string()
+            'id_barang'=>[
+                'type'=> Type::int()
             ],
             'harga' => [
                 'type' => Type::Int()
@@ -39,10 +42,15 @@ class createSellingList extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
+        //cek user
+        $iduser=User::where('username',$args['id_user'])->first();
+//cek barang
+$sku=Barang::where('id',$args['id_barang'])->first();
+        //
         $selling = new SellingList();
-        $selling->id_user=$args['id_user'];
+        $selling->id_user=$iduser->id;
         $selling->harga=$args['harga'];
-        $selling->sku_barang=$args['sku_barang'];
+        $selling->sku_barang=$sku->sku;
         $selling->save();
         return $selling;
     }

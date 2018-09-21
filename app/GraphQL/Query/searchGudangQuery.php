@@ -16,17 +16,18 @@ class searchGudangQuery extends Query
 
     public function type()
     {
-        return  (GraphQL::type('gudangType'));
+        return  type::listOf(GraphQL::type('gudangType'));
   
     }
 
     public function args()
     {
         return [
-            'id' => ['name' => 'id', 'type' => Type::Int()],
-            
             'nama' => ['name' => 'nama', 'type' => Type::string()],
-            'alamat'  => [ 'type' => GraphQL::type('IAlamat')],
+            'skip' => ['name' => 'skip', 'type' => Type::Int()],
+            'take' => ['name' => 'take', 'type' => Type::Int()],
+            
+            
             
            
         ];
@@ -36,13 +37,13 @@ class searchGudangQuery extends Query
     {
         
         if (isset($args['nama'])) {
-            $gudang= Gudang::where('nama' , $args['nama'])->first();
+            $gudang= Gudang::where('nama' ,'like', $args['nama'].'%') 
+            ->skip($args['skip'])->take($args['take'])->get();
         
             return $gudang;
      
-        }else if(isset($args['alamat'])) {
-            return User::where('alamat', $args['alamat'])->get(); 
-           
+     
+                   
         }else {
             $gudang= Gudang::all();
             

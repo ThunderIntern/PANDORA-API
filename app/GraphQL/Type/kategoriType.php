@@ -31,11 +31,19 @@ class kategoriType extends BaseType
                 'type' 	=> Type::Int(),
                 'rules' => ['nullable', 'integer'],
             ],    
-            'kategori'		=> 	[
-                'name' 	=> 'kategori', 		
-                'type' 	=> Type::string(),
-                'rules' => ['nullable', 'string'],
-            ],     
+            'tag' => [
+                
+                
+                'type' => Type::listOf(GraphQL::type('kategoriType')),
+                
+                'resolve' => function ($root, $args) {
+                  
+                return  $root->kategori;
+                  
+
+                  
+                }
+            ],   
            
         ];
     }
